@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 //  通过cross-env包 在命令行之前添加环境变量 判断当前环境是否是开发环境，还是生产环境
 const HTMLplugin = require('html-webpack-plugin');
+const ExtractPlugin = require('extract-text-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development'
 console.log(process.env.NODE_ENV)
 let config = {
@@ -9,7 +10,7 @@ let config = {
     // webpack入口entry
     entry: path.join(__dirname, 'src/index.js'),
     output: {   // 出口
-        filename: 'bundle.js',
+        filename: 'bundle.[hash:8].js',
         path: path.join(__dirname, 'dist')
     },
     module: {
@@ -19,18 +20,12 @@ let config = {
         },{
             test: /\.jsx$/,
             loader: 'babel-loader'
-        },{
-            test: /\.css$/,
-            use: ['style-loader','css-loader']
-        },{
-            test: /\.styl/,
-            use: ['style-loader','css-loader',{
-                loader: 'postcss-loader',
-                options: {
-                    sourceMap: true    //
-                }
-            },'stylus-loader']
-        },{
+        },
+        // {
+        //     test: /\.css$/,
+        //     use: ['style-loader','css-loader']
+        // }
+        {
             test: /\.(png|jpg|gif|jpeg|svg)$/,
             use: [{
                 loader: 'url-loader',   // url loader基于file-loader
@@ -53,6 +48,16 @@ let config = {
 }
 // console.log(isDev)
 if(isDev){  // 生产环境
+    config.module.rules.push({
+        test: /\.styl/,
+        use: ['style-loader','css-loader',{
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true    //
+            }
+        },'stylus-loader']
+
+    })
     // 调试代码
     config.devtool = '#cheap-module-eval-source-map';
     config.devServer = {
@@ -70,6 +75,38 @@ if(isDev){  // 生产环境
     config.plugins.push(
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
+    )
+} else {
+    config.entry = {
+        app: path.join(__dirname, 'src/index.js'),
+        vendor: ['vue']     // 单独打包类库
+    }
+    // chunkhash  和 hash区别是 hash打包出的模块hash都是一样的 chunkhash每个不同
+    config.output.filename = '[name].[chunkhash:8].js';
+    config.module.rules.push({
+        test: /\.styl/,
+        use: ExtractPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+                'css-loader',
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        sourceMap: true
+                    }
+                },
+                'stylus-loader'
+            ]
+        })
+    });
+    config.plugins.push(
+        new ExtractPlugin('styles.[contentHash:8].css'),
+        new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
+            name: 'vendor'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
+            name: 'runtime' // 单独打包出单独的webpack模块
+        })
     )
 }
 
