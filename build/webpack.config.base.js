@@ -15,7 +15,9 @@ let config = {
         rules: [{   // eslint 检测所有的vue js jsx 后缀文件的规范
             test: /\.(vue|js|jsx)$/,
             loader: 'eslint-loader',
-            exclude: /node_modules/
+            exclude: /node_modules/,
+            // 预处理：在处理 以上的后缀名文件 之前都先处理一便eslint 之后在执行
+            enforce: 'pre'
         },{
             test: /\.vue$/,
             loader: 'vue-loader',
