@@ -4,6 +4,7 @@ const createVueloaderOptions = require('./vue-loader.config')
 const isDev = process.env.NODE_ENV === 'development'
 console.log(process.env.NODE_ENV)
 let config = {
+    mode: process.env.NODE_ENV || 'production', // production || development
     target: 'web',
     // webpack入口entry
     entry: path.join(__dirname, '../client/index.js'),

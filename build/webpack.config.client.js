@@ -36,6 +36,7 @@ const devServer = {
 if(isDev){  // 开发环境
     config = merge(baseConfig, {
         // 调试代码
+        // webpack@4可以不加
         devtool: '#cheap-module-eval-source-map',
         module: {
             rules: [{
@@ -68,16 +69,17 @@ if(isDev){  // 开发环境
         },
         devServer,
         plugins: defaultPlugins.concat([
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin()
+            new webpack.HotModuleReplacementPlugin()
+            // new webpack.NoEmitOnErrorsPlugin()
         ])
     });
 } else {    // 生产打包环境
     console.log('生产环境')
     config = merge(baseConfig, {
         entry: {
-            app: path.join(__dirname, '../client/index.js'),
-            vendor: ['vue']     // 单独打包类库
+            app: path.join(__dirname, '../client/index.js')
+            // webpack@4不需要指定类库 单独打包
+            // vendor: ['vue']     // 单独打包类库
         },
         output: {
             // chunkhash  和 hash区别是 hash打包出的模块hash都是一样的 chunkhash每个不同
@@ -101,15 +103,24 @@ if(isDev){  // 开发环境
                 })
             }]
         },
-        plugins: [
-            new ExtractPlugin('styles.[contentHash:8].css'),
-            new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
-                name: 'vendor'
-            }),
-            new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
-                name: 'runtime' // 单独打包出单独的webpack模块
-            })
-        ]
+        // webpack@4 peizhi
+        // 这个配置相当于 webpack.optimize.CommonsChunkPlugin
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            },
+            // 通过非entry指定的name自动把runtime相关的代码放在这里
+            runtimeChunk: true
+        },
+        plugins: defaultPlugins.concat([
+            new ExtractPlugin('styles.[hash:8].css')
+            // new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
+            //     name: 'vendor'
+            // }),
+            // new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
+            //     name: 'runtime' // 单独打包出单独的webpack模块
+            // })
+        ])
     })
 }
 
