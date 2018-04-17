@@ -12,3 +12,13 @@
     使用命令 在package.json scripts下
 "lint": "eslint --ext .js --ext .jsx --ext .vue client/",   // 检测报错
 "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client/", // 自动修复报错
+
+.editorconfig文件
+root = true;    ## 在这个项目中读取配置 读到这里就可以
+[*]     ## 给下面所有的文件指定一个规范
+charset = utf-8     ## 指定编码为utf-8
+end_of-line = lf    ## 使用
+indent_size = 4     ## 使用tab键长度为4哥空格
+indent-style = space    ## 制表符
+insert_final_newline = true  ## 保存时在最后一行加空行
+trim_trailing = true    ## 一行后面多了一个空格 自动删除
