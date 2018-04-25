@@ -9,7 +9,10 @@ let config = {
     entry: path.join(__dirname, '../client/index.js'),
     output: {   // 出口
         filename: 'bundle.[hash:8].js',
-        path: path.join(__dirname, '../dist')
+        path: path.join(__dirname, '../dist'),
+        // 如果加上publicPath 需要在fullback时也加publickPath
+        // 作为一个基路径
+        publicPath: '/public/'
     },
     module: {
         rules: [{   // eslint 检测所有的vue js jsx 后缀文件的规范

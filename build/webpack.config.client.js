@@ -30,7 +30,13 @@ const devServer = {
     // historyFallback: {  // 映射地址
     //
     //  },
-    hot: true    // 添加热加载需要配置   webpack.HotModuleReplacementPlugin()  plugin
+    hot: true,    // 添加热加载需要配置   webpack.HotModuleReplacementPlugin()  plugin
+    // 在前端路由跳转的时候 如果不加这个
+    // 浏览器会认为是在请求服务器
+    // 刷新页面的时候会报错 error found
+    historyApiFallback: {
+      index: '/public/index.html'
+    }
 }
 
 if(isDev){  // 开发环境

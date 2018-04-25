@@ -3,7 +3,15 @@
     <div id="app">
         <div id="cover"></div>
         <appHeader></appHeader>
-        <appTodo></appTodo>
+        <!-- <appTodo></appTodo> -->
+        <!-- <router-link :to="{name: 'app'}">app</router-link> -->
+        <router-link to="/app/123">app</router-link>
+        <router-link to="/login">login</router-link>
+        <router-link to="/exact">login exact</router-link>
+        <!-- 添加组件的过度效果 -->
+        <transition name="fade">
+          <router-view />
+        </transition>
         <appFooter></appFooter>
     </div>
 </template>
@@ -25,6 +33,10 @@ export default {
         appHeader,
         appFooter,
         appTodo
+      },
+      mounted () {
+        // 获取路由信息参数等
+        console.log(this.$route)
       }
     }
 </script>

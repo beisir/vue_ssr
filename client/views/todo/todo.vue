@@ -32,6 +32,9 @@
                   @clearAllCompleted="clearAllCompleted"
         >
     </appTabs>
+
+    <router-view />
+
     </section>
 </template>
 
@@ -41,6 +44,11 @@ import appTabs from './tabs.vue'
 let id = 0
 export default {
       // data() 声明数据
+      // 在router中定义props：true 可以将 /app/:id 当作props传入参数来获取
+      props: ['id'],
+      mounted () {
+        console.log(this.id)
+      },
       data () {
         return {
           todos: [],
