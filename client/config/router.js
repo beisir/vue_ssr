@@ -1,11 +1,7 @@
-import Router from 'vue-router'
+// import Router from 'vue-router'
 import routes from './routes'
-import Vue from 'vue'
 
-Vue.use(Router)
-
-console.log('this is router')
-export default () => {
+export default (Router) => {
   return new Router({
     mode: 'history',
     routes,
