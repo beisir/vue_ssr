@@ -21,7 +21,7 @@ const defaultPlugins = [
 ]
 
 const devServer = {
-    port: 8080,
+    port: 8085,
     host: '0.0.0.0', // 设置为0.0.0.0 可以通过localhost 和内网ip 或者127.0.0.1访问
     overlay: {  //  如果在webpack编译的时候有任何错误都会显示在网页上
         error: true
