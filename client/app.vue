@@ -16,9 +16,9 @@
         <appHeader></appHeader>
         <!-- <appTodo></appTodo> -->
         <!-- <router-link :to="{name: 'app'}">app</router-link> -->
-        <router-link to="/app/123">app</router-link>
+        <!-- <router-link to="/app/123">app</router-link>
         <router-link to="/login">login</router-link>
-        <router-link to="/exact">login exact</router-link>
+        <router-link to="/exact">login exact</router-link> -->
         <!-- 添加组件的过度效果 -->
         <transition name="fade">
           <router-view />
@@ -29,6 +29,8 @@
           必须在router的配置中改成components{}的方式
           同时在router-view 加上name字段-->
         <!-- <router-view name="aa" /> -->
+
+        <Notification content="helloword"></Notification>
         <appFooter></appFooter>
     </div>
 </template>
@@ -37,13 +39,10 @@
     // 引入header.vue组件
     import appHeader from './views/layout/header.vue'
     // console.log(appHeader.__docs) // 查看docs组件内容 未开启
-
     // 引入footer.jsx组件—
     import appFooter from './views/layout/footer.jsx'
-
     // 引入todo.vue组件
     // import appTodo from './views/todo/todo.vue'
-
     import {
       mapState,
       mapGetters,
@@ -51,6 +50,9 @@
       mapMutations
     } from 'vuex'
 export default {
+      metaInfo: {
+        title: 'VueSSR APP'
+      },
       // 声明组件，之后便可以使用组件标签
       components: {
         appHeader,
@@ -59,7 +61,6 @@ export default {
       mounted () {
         // 获取路由信息参数等
         // console.log(this.$route)
-
         // 调用vuex的方法
         // let i = 1
         // setInterval(() => {
@@ -67,11 +68,9 @@ export default {
         //   // this.$store.commit('updateCount', i++)
         //   this.updateCount(i++)
         // }, 1000)
-
         // vuex 允许变量可以在外部修改，但是不支持这么做
         // 通过vuex 实例上的strict方法禁止掉这种外部修改的方式
         // this.$store.state.count = 34
-
         // dispatch 提交actions 一般用于异步操作
         // 异步操作不允许直接提交mutations
         // 所以可以通过actions提交再去触发mutations
@@ -84,19 +83,14 @@ export default {
           num: 5,
           time: 2000
         })
-
         // vuex 分模块调用mutations全局命名
         // this.updateText(7890)
-
         // 加上namespaced 的方式
         this['a/updateText'](4567)
-
         // 通过模块命名的方式调用getters
         // console.log(this['a/textPlus'])
         // console.log(this.textPlus)
-
         this['a/add']('ooo')
-
         // 调用其他模块的mutations
         this.testAction()
       },
@@ -105,7 +99,6 @@ export default {
         // textA () {
         //   return this.$store.state.b.text
         // },
-
         // 结构vuex的辅助函数的state
         // 但是默认babel不支持所以要借助插件
         // babel-preset-stage-1: 支持最高版本的js语法，包括es8
@@ -116,15 +109,12 @@ export default {
           // counter: (state) => {
           //   return state.count
           // }
-
           // vuex 通过命名空间进行调用该方法
           // 需要使用这种方式进行vuex分模块的方式调用
           textA: state => state.a.text,
-
           // 动态创建的模块
           textC: state => state.c.text
         }),
-
         // ...mapGetters(['fullName', 'a/textPlus'])
         // count () {
         //   return this.$store.state.count
@@ -132,7 +122,6 @@ export default {
         // fullName () {
         //   return this.$store.getters.fullName
         // }
-
         // vuex 通过命名空间进行调用该方法
         // 需要使用这种方式进行vuex分模块的方式调用
         ...mapGetters({
@@ -145,7 +134,6 @@ export default {
           // 全局的
           'updateCountAsync',
           'testAction',
-
           // 命名空间的
           'a/add'
         ]),
@@ -155,7 +143,6 @@ export default {
           // 之所以不需要上面state那么麻烦的重新命名方式引用
           // 是因为vuex默认会把mutations放到全局的命名空间当中
           // 'updateText'
-
           // 如果想区分开全局的命名需要在vuex 模块下加 namespaced： true
           // 同时在 下方使用 ‘a/updateText’ 这种方式引用
           // 同时通过this调用的时候也通过this['a/updateText'] 这种方式

@@ -16,7 +16,7 @@ export default (Vuex) => {
     // 定义一些插件
     plugins: [
       (store) => {
-        console.log('plugins   ', store)
+        // console.log('plugins   ', store)
       }
     ],
     // 模块创建并且使用
@@ -73,6 +73,11 @@ export default (Vuex) => {
               root: true
             })
           }
+        }
+      },
+      c: {
+        state: {
+          text: 'cccccccc'
         }
       }
     }

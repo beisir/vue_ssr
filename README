@@ -22,3 +22,13 @@ indent_size = 4     ## 使用tab键长度为4哥空格
 indent-style = space    ## 制表符
 insert_final_newline = true  ## 保存时在最后一行加空行
 trim_trailing = true    ## 一行后面多了一个空格 自动删除
+
+
+// 自动重新启动
+nodemon:  {
+    "restartable": "rs",    // 命令行输入rs自动重启
+    "ignore": [], // 去除重新启动监听的 文件目录
+}
+
+// 一次性启动两个服务
+concurrently

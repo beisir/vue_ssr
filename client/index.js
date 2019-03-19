@@ -42,14 +42,8 @@ store.registerModule('c', {
 // 第一个参数为对象 有当前调用mutation的信息， 以及一些传入的值
 store.subscribeAction((action, state) => {
   console.log(action.type)
-  console.log(action.payload)
+  // console.log(action.payload)
 })
-
-console.log(store)
-
-const root = document.createElement('div')
-document.body.appendChild(root)
-
 // 全局的导航首位 全局的路由拦截拦截
 // 跳转之前触发 必须由next方法才能成功跳转
 
@@ -80,4 +74,4 @@ new Vue({
   router,
   store,
   render: (h) => h(App)
-}).$mount(root)
+}).$mount('#root')

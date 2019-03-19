@@ -6,7 +6,7 @@ export default (Router) => {
     mode: 'history',
     routes,
     // 作为应用 基路径 在路由前面都会加入 localhost:8080/base/app
-    base: '/base/',
+    // base: '/base/',
     linkActiveClass: 'active-link',
     linkExactActiveClass: 'exact-active-link',
     // to:去到的路由

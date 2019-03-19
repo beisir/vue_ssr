@@ -43,6 +43,9 @@
 import appTabs from './tabs.vue'
 let id = 0
 export default {
+      metaInfo: {
+        title: 'Todo meta App'
+      },
       // 组件内部的路由拦截
       // 在没有next()的情况下拿不到组件上的this
       // 因为组件现在还有真正被调用
@@ -53,7 +56,6 @@ export default {
         // 就是如果你的路由配置中是components 的话是不会触发传入的 props
         // 所以2这种方式只适合单个路由component 不适合 多个components
         next(vm => {
-          console.log(vm)
           console.log(`todo this 下的 ${vm.id}`)
         })
       },

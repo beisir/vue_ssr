@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 const HTMLplugin = require('html-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
+const VueClientPlugin = require('vue-server-renderer/client-plugin');
 
 let config;
 const isDev = process.env.NODE_ENV === 'development'
@@ -17,7 +18,11 @@ const defaultPlugins = [
             NODE_ENV: isDev ? '"development"': '"production"'
         }
     }),
-    new HTMLplugin()
+    new HTMLplugin({
+        template: path.join(__dirname, 'template.html')
+    }),
+
+    new VueClientPlugin()   // 会默认生成一个vue-ssr-client-manifest.json 缓存文件
 ]
 
 const devServer = {
@@ -82,12 +87,13 @@ if(isDev){  // 开发环境
     console.log('生产环境')
     config = merge(baseConfig, {
         entry: {
-            app: path.join(__dirname, '../client/index.js'),
+            app: path.join(__dirname, '../client/client-entry.js'),
             vendor: ['vue']     // 单独打包类库
         },
         output: {
             // chunkhash  和 hash区别是 hash打包出的模块hash都是一样的 chunkhash每个不同
-            filename: '[name].[chunkhash:8].js'
+            filename: '[name].[chunkhash:8].js',
+            publicPath: '/public/'  // 服务端需要
         },
         module: {
             rules: [{
@@ -107,7 +113,7 @@ if(isDev){  // 开发环境
                 })
             }]
         },
-        plugins: [
+        plugins: defaultPlugins.concat([
             new ExtractPlugin('styles.[contentHash:8].css'),
             new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
                 name: 'vendor'
@@ -115,7 +121,7 @@ if(isDev){  // 开发环境
             new webpack.optimize.CommonsChunkPlugin({   // 单独打包类库等文件
                 name: 'runtime' // 单独打包出单独的webpack模块
             })
-        ]
+        ])
     })
 }
 

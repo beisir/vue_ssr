@@ -9,7 +9,8 @@ export default [
   {
     // 定义路由参数
     // 匹配的应该是 /app/任何变量  只要在app/后面都会仍为是参数
-    path: '/app/:id',
+    // path: '/app/:id',
+    path: '/app/',
 
     // 会将:id的参数当作props  传入这个组件
     props: true,
