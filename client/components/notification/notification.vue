@@ -9,28 +9,28 @@
 
 <script>
 export default {
-    name: 'Notification',
-    props: {
-        content: {
-            type: String,
-            required: true
-        },
-        btn: {
-            type: String,
-            default: '关闭'
-        }
+  name: 'Notification',
+  props: {
+    content: {
+      type: String,
+      required: true
     },
-    computed: {
-        style () {
-            return {};
-        }
-    },
-    methods: {
-        handleColse (e) {
-            e.preventDefault();
-            this.$emit('colse');
-        }
+    btn: {
+      type: String,
+      default: '关闭'
     }
+  },
+  computed: {
+    style () {
+      return {}
+    }
+  },
+  methods: {
+    handleColse (e) {
+      e.preventDefault()
+      this.$emit('colse')
+    }
+  }
 }
 </script>
 

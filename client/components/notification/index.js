@@ -1,4 +1,4 @@
-import Notification from './notification.vue';
+import Notification from './notification.vue'
 export default (Vue) => {
-    Vue.component(Notification.name, Notification);
-};
+  Vue.component(Notification.name, Notification)
+}
