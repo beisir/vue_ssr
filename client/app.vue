@@ -24,13 +24,14 @@
           <router-view />
         </transition>
 
+        <button type="button" @click="noteifyFn">点击</button>
         <!-- 第二个router-view
           如果一个链接跳入的router-view有两个的情况下
           必须在router的配置中改成components{}的方式
           同时在router-view 加上name字段-->
         <!-- <router-view name="aa" /> -->
 
-        <Notification content="helloword"></Notification>
+        <!-- <Notification content="helloword"></Notification> -->
         <appFooter></appFooter>
     </div>
 </template>
@@ -49,6 +50,7 @@
       mapActions,
       mapMutations
     } from 'vuex'
+let i = 0
 export default {
       metaInfo: {
         title: 'VueSSR APP'
@@ -147,7 +149,13 @@ export default {
           // 同时在 下方使用 ‘a/updateText’ 这种方式引用
           // 同时通过this调用的时候也通过this['a/updateText'] 这种方式
           'a/updateText'
-        ])
+        ]),
+        noteifyFn () {
+          this.$notify({
+            content: `test content ======> ${i++}`,
+            btn: '关闭'
+          })
+        }
       }
     }
 </script>

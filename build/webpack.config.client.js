@@ -31,6 +31,7 @@ const devServer = {
     overlay: {  //  如果在webpack编译的时候有任何错误都会显示在网页上
         error: true
     },
+    headers: {'Access-Control-Allow-Origin': '*'},
     open: true,  // 启动webpack-dev-server 自动打开页面
     // historyFallback: {  // 映射地址
     //
