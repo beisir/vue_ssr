@@ -39,30 +39,30 @@
 </template>
 
 <script>
-    // 引入header.vue组件
-    import appHeader from './views/layout/header.vue'
-    // console.log(appHeader.__docs) // 查看docs组件内容 未开启
-    // 引入footer.jsx组件—
-    import appFooter from './views/layout/footer.jsx'
-    // 引入todo.vue组件
-    // import appTodo from './views/todo/todo.vue'
-    import {
-      mapState,
-      mapGetters,
-      mapActions,
-      mapMutations
-    } from 'vuex'
-let i = 0
+// 引入header.vue组件
+import appHeader from './views/layout/header.vue'
+// console.log(appHeader.__docs) // 查看docs组件内容 未开启
+// 引入footer.jsx组件—
+import appFooter from './views/layout/footer.jsx'
+// 引入todo.vue组件
+// import appTodo from './views/todo/todo.vue'
+import {
+    mapState,
+    mapGetters,
+    mapActions,
+    mapMutations
+} from 'vuex';
+let i = 0;
 export default {
-      metaInfo: {
+    metaInfo: {
         title: 'VueSSR APP'
-      },
-      // 声明组件，之后便可以使用组件标签
-      components: {
+    },
+    // 声明组件，之后便可以使用组件标签
+    components: {
         appHeader,
         appFooter
-      },
-      mounted () {
+    },
+    mounted () {
         // 获取路由信息参数等
         // console.log(this.$route)
         // 调用vuex的方法
@@ -97,8 +97,8 @@ export default {
         this['a/add']('ooo')
         // 调用其他模块的mutations
         this.testAction()
-      },
-      computed: {
+    },
+    computed: {
         // vuex分模块通过命名空间调用
         // textA () {
         //   return this.$store.state.b.text
@@ -109,15 +109,15 @@ export default {
         // 同时在.babelrc 文件的 presets: ['stage-1'] 加入配置
         // ...mapState(['count']),
         ...mapState({
-          counter: 'count',
-          // counter: (state) => {
-          //   return state.count
-          // }
-          // vuex 通过命名空间进行调用该方法
-          // 需要使用这种方式进行vuex分模块的方式调用
-          textA: state => state.a.text,
-          // 动态创建的模块
-          textC: state => state.c.text
+            counter: 'count',
+            // counter: (state) => {
+            //   return state.count
+            // }
+            // vuex 通过命名空间进行调用该方法
+            // 需要使用这种方式进行vuex分模块的方式调用
+            textA: state => state.a.text,
+            // 动态创建的模块
+            textC: state => state.c.text
         }),
         // ...mapGetters(['fullName', 'a/textPlus'])
         // count () {
@@ -129,37 +129,37 @@ export default {
         // vuex 通过命名空间进行调用该方法
         // 需要使用这种方式进行vuex分模块的方式调用
         ...mapGetters({
-          'fullName': 'fullName',
-          'textPlus': 'a/textPlus'
+            'fullName': 'fullName',
+            'textPlus': 'a/textPlus'
         })
-      },
-      methods: {
+    },
+    methods: {
         ...mapActions([
-          // 全局的
-          'updateCountAsync',
-          'testAction',
-          // 命名空间的
-          'a/add'
+            // 全局的
+            'updateCountAsync',
+            'testAction',
+            // 命名空间的
+            'a/add'
         ]),
         ...mapMutations([
-          'updateCount',
-          // updateText作为分模块的方式也可以是这么直接调用mutations方式
-          // 之所以不需要上面state那么麻烦的重新命名方式引用
-          // 是因为vuex默认会把mutations放到全局的命名空间当中
-          // 'updateText'
-          // 如果想区分开全局的命名需要在vuex 模块下加 namespaced： true
-          // 同时在 下方使用 ‘a/updateText’ 这种方式引用
-          // 同时通过this调用的时候也通过this['a/updateText'] 这种方式
-          'a/updateText'
+            'updateCount',
+            // updateText作为分模块的方式也可以是这么直接调用mutations方式
+            // 之所以不需要上面state那么麻烦的重新命名方式引用
+            // 是因为vuex默认会把mutations放到全局的命名空间当中
+            // 'updateText'
+            // 如果想区分开全局的命名需要在vuex 模块下加 namespaced： true
+            // 同时在 下方使用 ‘a/updateText’ 这种方式引用
+            // 同时通过this调用的时候也通过this['a/updateText'] 这种方式
+            'a/updateText'
         ]),
         noteifyFn () {
-          this.$notify({
-            content: `test content ======> ${i++}`,
-            btn: '关闭'
-          })
+            this.$notify({
+                content: `test content ======> ${i++}`,
+                btn: '关闭'
+            });
         }
-      }
     }
+}
 </script>
 
 <!-- 设置scoped 表示当前组件下的id只在当前组件起作用，不会跟其他组件引起冲突 -->

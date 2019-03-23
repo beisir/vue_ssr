@@ -9,39 +9,39 @@
 
 <script>
 export default {
-  name: 'Notification', // 默认的 name名。是为了 Vue.component(xxxxxname, xxxx);使用更方便
-  props: {
-    content: { // 默认参数 提示内容
-      type: String,
-      required: true
+    name: 'Notification', // 默认的 name名。是为了 Vue.component(xxxxxname, xxxx);使用更方便
+    props: {
+        content: { // 默认参数 提示内容
+            type: String,
+            required: true
+        },
+        btn: { // 关闭文字
+            type: String,
+            default: 'X'
+        }
     },
-    btn: { // 关闭文字
-      type: String,
-      default: 'X'
-    }
-  },
-  computed: {
-    style () { // 计算属性div样式添加样式
-      return {}
-    }
-  },
-  data () {
-    return {
-      visible: true // 默认为true 通过div的显示隐藏出发弹出框的动画
-    }
-  },
-  methods: {
-    handleColse (e) { // 关闭派发事件
-      e.preventDefault()
-      this.$emit('colse')
+    computed: {
+        style() { // 计算属性div样式添加样式
+            return {}
+        }
     },
-    afterLeave () { // 动画结束派发事件
-      this.$emit('colsed')
+    data() {
+        return {
+            visible: true // 默认为true 通过div的显示隐藏出发弹出框的动画
+        }
     },
-    afterEnter () {}, // 动画进入之后
-    clearTimer () {}, // 默认清除自动隐藏 主要由外侧传入覆盖，或者使用vue.use(模版时使用);
-    createTimer () {} // 创建动画自动隐藏 规则同上
-  }
+    methods: {
+        handleColse(e) { // 关闭派发事件
+            e.preventDefault()
+            this.$emit('colse')
+        },
+        afterLeave() { // 动画结束派发事件
+            this.$emit('colsed')
+        },
+        afterEnter() {}, // 动画进入之后
+        clearTimer() {}, // 默认清除自动隐藏 主要由外侧传入覆盖，或者使用vue.use(模版时使用);
+        createTimer() {} // 创建动画自动隐藏 规则同上
+    }
 
 }
 </script>

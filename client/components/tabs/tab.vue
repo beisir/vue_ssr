@@ -22,23 +22,14 @@ export default {
         this.$parent.panes.push(this)
     },
     render() {
-        const tab = this.$slots.label || < span > {
-            this.label
-        } < /span>
+        const tab = this.$slots.label || <span>{this.label}</span>
         const classNames = {
             tab: true,
             active: this.active
         }
-        return ( <
-            li class = {
-                classNames
-            }
-            on - click = {
-                this.handleClick
-            } > {
-                tab
-            } < /li>
-        )
+        return (
+            <li class={classNames} on-click={this.handleClick}>{tab}</li>
+        );
     },
     methods: {
         handleClick() {
