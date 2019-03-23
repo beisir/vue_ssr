@@ -3,6 +3,6 @@ root = true
 charset = utf-8
 end_of-line = lf
 indent_size = 4
-indent-style = space
+indent-style = tab
 insert_final_newline = true
 trim_trailing = true

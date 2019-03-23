@@ -4,14 +4,14 @@
         <div id="cover"></div>
 
         <!-- <p>this is vuex {{count}}</p> -->
-        <p>{{counter}}</p>
+        <!-- <p>{{counter}}</p>
 
         <h3>{{fullName}}</h3>
 
         <h1>vuex 分模块的方式调用state =>>> {{textA}}</h1>
         <h1>vuex 分模块的方式调用getters =>>> {{textPlus}}</h1>
 
-        <h1>动态创建的模块{{textC}}</h1>
+        <h1>动态创建的模块{{textC}}</h1> -->
 
         <appHeader></appHeader>
         <!-- <appTodo></appTodo> -->
@@ -19,12 +19,14 @@
         <!-- <router-link to="/app/123">app</router-link>
         <router-link to="/login">login</router-link>
         <router-link to="/exact">login exact</router-link> -->
+
         <!-- 添加组件的过度效果 -->
         <transition name="fade">
           <router-view />
         </transition>
 
         <button type="button" @click="noteifyFn">点击</button>
+
         <!-- 第二个router-view
           如果一个链接跳入的router-view有两个的情况下
           必须在router的配置中改成components{}的方式

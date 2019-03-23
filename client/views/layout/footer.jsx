@@ -4,17 +4,17 @@ import '../../assets/styles/footer.styl'
 export default {
   data () {
     return {
-      author: 'itPoet',
-      blog: 'itPoet.cn'
+      author: 'beisir',
+      blog: 'hsy7426.com'
     }
   },
   render () {
     return (
     // <div id={footerClass.footer}>
       <div id="footer">
-        <span>Power by {this.author}，欢迎访问作者博客：{this.blog}</span>
+        <span>Power by {this.author}，学习vue_ssr：{this.blog}</span>
         <br/>
-        <span>Hosted by Coding Pages</span>
+        {/* <span>Hosted by Coding Pages</span> */}
       </div>
     )
   }
