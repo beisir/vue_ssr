@@ -8,14 +8,14 @@
 
 
 
-    <input type="text" class="add-input" autofocus="autofocus" v-model="inputContent" placeholder="接下来要做什么?" @keyup.enter="addTodo">
+    <input type="text" class="add-input" autofocus="autofocus" placeholder="接下来要做什么?" @keyup.enter="handleAdd">
 
     <!-- 使用items组件 -->
     <!-- :todo="todo" 往子组件item.vue 传入todo对象
             v-for="todo in filteredTodos" 遍历 todos 数组
              @del="deleteTodo" 接收子组件要触发的del方法
         -->
-    <appItem :todo="todo" v-for="todo in filteredTodos" :key="todo.id" @del="deleteTodo">
+    <appItem :todo="todo" v-for="todo in filteredTodos" :key="todo.id" @del="deleteTodo" @toggle="toggleTodoState">
     </appItem>
     <!--
             用 key 管理可复用的元素
@@ -34,6 +34,12 @@
 </template>
 
 <script>
+import {
+    mapState,
+    mapActions
+} from 'vuex';
+
+
 import appItem from './items.vue'
 import helper from './helper.vue'
 let id = 0
@@ -77,10 +83,13 @@ export default {
         // }, 5000)
 
         // console.log(this.id)
+
+
+        this.fetchTodos();
     },
     data () {
         return {
-          todos: [],
+          // todos: [],
           states: ['all', 'active', 'completed'],
           filter: 'all',
           inputContent: ''
@@ -95,7 +104,8 @@ export default {
             const completed = this.filter === 'completed'
             // 将todos数组中，completed为true的值过滤出来，并返回一个新数组
             return this.todos.filter(todo => completed === todo.completed)
-        }
+        },
+        ...mapState(['todos'])
     },
     // 组件
     components: {
@@ -104,32 +114,58 @@ export default {
     },
   // 方法
     methods: {
+        ...mapActions([
+            'fetchTodos',
+            'addTodo',
+            'deleteTodo',
+            'updateTodo',
+            'deleteAllComputed'
 
+        ]),
+
+        toggleTodoState (todo) {
+            this.updateTodo({
+                id: todo.id,
+                todo: Object.assign({}, todo, {
+                    computed: !todo.computed
+                })
+            });
+
+        },
         handChangeTable (filter) {
             this.filter = filter
         },
 
-        addTodo (e) {
-            if (e.target.value.trim()) {
-                this.todos.unshift({
-                    id: id++,
-                    content: e.target.value.trim(),
-                    completed: false
+        handleAdd (e) {
+            let content =  e.target.value.trim()
+            if (!content) {
+                this.$notify({
+                    content: '请输入内容'
                 });
-                e.target.value = ''
-            } else {
-                console.log('傻X，输入不能为空 !-_-')
+                return;
             };
+            const todo = {
+                content,
+                computed: false
+            };
+
+            this.addTodo(todo);
+            e.target.value = '';
+            console.log(e.target.value);
+
         },
-        deleteTodo (id) {
-            this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
-        },
+        // deleteTodo (id) {
+        //     this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+        // },
         toggleFilter (state) {
             this.filter = state
         },
         clearAllCompleted () {
             // 给todos赋一个新的值（即todo.completed为false的值）
-            this.todos = this.todos.filter(todo => todo.completed === false)
+            // this.todos = this.todos.filter(todo => todo.completed === false)
+
+
+            this.deleteAllComputed();
         }
     }
 }

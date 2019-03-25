@@ -1,6 +1,6 @@
 <template>
 <div :class="['todo-item', todo.completed ? 'completed' : '']">
-    <input type="checkbox" class="toggle" v-model="todo.completed">
+    <input type="checkbox" class="toggle" :checked="todo.computed" @click="handleToggle">
     <label>{{todo.content}}</label>
     <button class="destroy" @click="deleteTodo"></button>
 </div>
@@ -17,6 +17,12 @@ export default {
         }
     },
     methods: {
+        handleToggle (e) {
+            e.preventDefault();
+            this.$emit('toggle', this.todo);
+        },
+
+
         deleteTodo() {
             // this.$emit 触发del事件，并返回todo.id
             // 往父组件传递 del 方法

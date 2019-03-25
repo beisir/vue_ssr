@@ -1,5 +1,9 @@
 export default {
     count: 0,
     firstName: 'bei',
-    lastName: 'shan'
+    lastName: 'shan',
+
+
+
+    todos: []
 }
