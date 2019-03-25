@@ -2,7 +2,9 @@
     <!-- app.vue 的template标签内只能有一个节点 -->
     <div id="app">
         <div id="cover"></div>
-
+        <div id="loading" v-show="loading">
+          <Loading></Loading>
+        </div>
         <!-- <p>this is vuex {{count}}</p> -->
         <!-- <p>{{counter}}</p>
 
@@ -46,6 +48,9 @@ import appHeader from './views/layout/header.vue'
 import appFooter from './views/layout/footer.jsx'
 // 引入todo.vue组件
 // import appTodo from './views/todo/todo.vue'
+
+
+import Loading from './components/loading/loading.vue';
 import {
     mapState,
     mapGetters,
@@ -60,7 +65,8 @@ export default {
     // 声明组件，之后便可以使用组件标签
     components: {
         appHeader,
-        appFooter
+        appFooter,
+        Loading
     },
     mounted () {
         // 获取路由信息参数等
@@ -109,6 +115,7 @@ export default {
         // 同时在.babelrc 文件的 presets: ['stage-1'] 加入配置
         // ...mapState(['count']),
         ...mapState({
+            loading: 'loading',
             counter: 'count',
             // counter: (state) => {
             //   return state.count
@@ -180,5 +187,17 @@ export default {
         background-color #555
         opacity 0.5
         z-index -1
+    }
+    #loading{
+        position fixed
+        top 0
+        right 0
+        bottom 0
+        left 0
+        background-color rgba(255,255,255,.3)
+        z-index 99
+        display flex
+        align-items center
+        justify-content center
     }
 </style>

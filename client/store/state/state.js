@@ -4,6 +4,6 @@ export default {
     lastName: 'shan',
 
 
-
+    loading: false,
     todos: []
 }

@@ -24,6 +24,14 @@ export default {
 
     deleteAllComputed (state) {
         state.todos = state.todos.filter(t => !t.computed);
+    },
+
+    startLoading (state) {
+        state.loading = true;
+    },
+
+    endLoading (state) {
+        state.loading = false;
     }
 
 }
