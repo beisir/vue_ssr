@@ -32,3 +32,13 @@ nodemon:  {
 
 // 一次性启动两个服务
 concurrently
+
+// node服务正式部署
+// pm2.yml  文本类型的标记语言类似于json
+创建
+
+pm2 start pm2.yml --env production  // 启动服务
+pm2 restart vue-todo      // 重启服务
+pm2 stop vue-todo         // 暂停服务
+pm2 list                  // 查看已经启动的服务
+pm2 log vue-todo          // 查看日志

@@ -1,0 +1,12 @@
+# 配置文件
+apps:
+    # 代表启动服务要去运行的文件
+    - script: ./server/server.js
+      # 名字：用来标明要去找到的服务，用来查看日志
+      name: vue-todo
+      # 指定环境变量，启动服务的时候会作为环境变量穿进去  
+      env_production:
+        NODE_ENV: production
+      # 只能通过域名去访问
+        HOST: localhost
+        PORT: 8888
