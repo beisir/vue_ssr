@@ -85,9 +85,8 @@ if (isDev) {
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods());
 
 
-
-
-
+console.log(process.env.HOST, process.env.PORT);
+console.log(isDev)
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 3333;
 
