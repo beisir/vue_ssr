@@ -17,7 +17,7 @@ import {
 } from 'vuex';
 export default {
     metaInfo: {
-        title: 'login page'
+        title: 'login page hello pm2'
     },
     data () {
         return {
