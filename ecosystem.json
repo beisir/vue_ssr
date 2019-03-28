@@ -1,0 +1,30 @@
+{
+    "apps": [
+        {
+            "name": "vue-todo",
+            "script": "server/server.js",
+            "env": {
+                "COMMON_VARIABLE": true
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        }
+    ],
+    "deploy": {
+        "production": {
+            "user": "beisir",
+            "host": ["47.92.2.12"],
+            "port": "8888",
+            "ref": "origin/master",
+            "repo": "git@github.com:beisir/vue_ssr.git",
+            "path": "/www/webtodo",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+
+
+}
