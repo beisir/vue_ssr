@@ -43,6 +43,6 @@ pm2 stop vue-todo         // 暂停服务
 pm2 list                  // 查看已经启动的服务
 pm2 log vue-todo          // 查看日志
 
-// 另外一种配置方式
+// 另外一种配置方式 asd
 sudo chmod 777 webtodo // 修改文件夹可读写
 pm2 deploy ecosystem.json production setup
