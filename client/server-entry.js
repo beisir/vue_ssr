@@ -8,9 +8,10 @@ export default (context) => {
             store
         } = createApp();
         router.push(context.url);
-
+        console.log(context);
         router.onReady(() => {
             const matchedComponents = router.getMatchedComponents()
+            console.log(matchedComponents);
             if (!matchedComponents.length) {
                 return reject(new Error('no component matched'))
             };
