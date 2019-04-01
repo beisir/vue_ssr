@@ -31,7 +31,13 @@ const isDev = process.env.NODE_ENV === 'development';
 /** --   记录请求信息日志   -- **/
 app.use(async (ctx, next) => {
     try {
+        console.log('=============================');
+        console.log('=============================');
         console.log(`request with path ${ctx.path}`);   // 记录所有请求的路径
+        Object.keys(ctx.query || {}).length && console.log(`request with query ${ctx.query}`);   // 记录所有请求的路径
+        Object.keys(ctx.body || {}).length && console.log(`request with body ${ctx.body}`);   // 记录所有请求的路径
+        console.log('=============================');
+        console.log('=============================');
         await next()
     } catch (err) {
         console.log(err);
@@ -84,9 +90,6 @@ if (isDev) {
 };
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods());
 
-
-console.log(process.env.HOST, process.env.PORT);
-console.log(isDev)
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 3333;
 

@@ -13,7 +13,6 @@ const successResponse = (data) => {
 };
 
 const valitateUser = async (ctx, next) => {
-    console.log('ctx================>',ctx.session);
     if (!ctx.session.user) {
         ctx.status = 401;
         ctx.body = 'new login';
