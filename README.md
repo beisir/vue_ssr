@@ -42,6 +42,12 @@ pm2 restart vue-todo      // 重启服务
 pm2 stop vue-todo         // 暂停服务
 pm2 list                  // 查看已经启动的服务
 pm2 log vue-todo          // 查看日志
+# pm2 logs [--raw]   #Display all processes logs in streaming
+# pm2 flush              #Empty all log file
+# pm2 reloadLogs    #Reload all logs
+
+
+
 
 // 另外一种配置方式 asd
 sudo chmod 777 webtodo // 修改文件夹可读写

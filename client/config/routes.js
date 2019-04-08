@@ -73,7 +73,11 @@ export default [{
         component: Login
     },
     {
-        path: '/login/exact',
-        component: Login
+        path: '/plugin',
+        component: resolve => {
+            require.ensure(['../views/plugin/plugin.vue'], () => {
+                resolve(require('../views/plugin/plugin.vue'));
+            })
+        }
     }
 ]

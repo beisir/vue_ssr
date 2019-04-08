@@ -27,8 +27,6 @@
           <router-view />
         </transition>
 
-        <button type="button" @click="noteifyFn">点击</button>
-
         <!-- 第二个router-view
           如果一个链接跳入的router-view有两个的情况下
           必须在router的配置中改成components{}的方式
