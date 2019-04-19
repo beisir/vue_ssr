@@ -6,7 +6,7 @@ const HTMLplugin = require('html-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 const VueClientPlugin = require('vue-server-renderer/client-plugin');
-
+const cdnConfig = require('../app.config.js').cdn;
 let config;
 const isDev = process.env.NODE_ENV === 'development'
 // console.log(isDev)
@@ -99,7 +99,7 @@ if(isDev){  // 开发环境
         output: {
             // chunkhash  和 hash区别是 hash打包出的模块hash都是一样的 chunkhash每个不同
             filename: '[name].[chunkhash:8].js',
-            publicPath: '/public/'  // 服务端需要
+            publicPath: cdnConfig.host  // 服务端需要
         },
         module: {
             rules: [{

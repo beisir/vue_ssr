@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "upload": "node build/upload.js",
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.config.client.js",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.config.server.js",
-    "build": "npm run clean && npm run build:client && npm run build:server",
+    "build": "npm run clean && npm run build:client && npm run build:server && npm run upload",
     "clean": "rimraf public && rimraf server-build",
     "msg1": "----------------------------  本地服务启动 server 为服务端， client为客户端  ----------------------------------",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
