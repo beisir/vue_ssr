@@ -99,7 +99,7 @@ if(isDev){  // 开发环境
         output: {
             // chunkhash  和 hash区别是 hash打包出的模块hash都是一样的 chunkhash每个不同
             filename: '[name].[chunkhash:8].js',
-            publicPath: cdnConfig.host  // 服务端需要
+            publicPath: '/'  // 服务端需要
         },
         module: {
             rules: [{
