@@ -12,7 +12,8 @@ module.exports = {
         sk: 'YSpHZVrNBM0c0dQ0x3tNSG6dUa9dnAKZiLEa74ZA'
     },
     cos: {
-        SecretId: 'AKIDnVCj4D5qNjuujOr9RYTGsJesvnT0Dj06',
+        host: 'https://vue-todo-1255338622.cos.ap-beijing.myqcloud.com/',
+	SecretId: 'AKIDnVCj4D5qNjuujOr9RYTGsJesvnT0Dj06',
         SecretKey: '40nU0LUyOdllaEXjjLtGXs8LPHyTq9JH',
         Bucket: 'vue-todo-1255338622',
         Region: 'ap-beijing',
